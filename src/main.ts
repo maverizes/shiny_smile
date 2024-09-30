@@ -8,7 +8,7 @@ async function startApp() {
   const app = await NestFactory.create(AppModule, { logger: false });
   const cfg = app.get(ConfigService)
 
-  // SET GLONBAL PREFIX
+  // SET GLOBAL PREFIX
   app.setGlobalPrefix('/api/v1')
 
   // USE MORGAN ON DEVELOPMENT ENVIRONMENT
