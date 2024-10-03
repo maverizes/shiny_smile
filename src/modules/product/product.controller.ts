@@ -1,7 +1,9 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto, UpdateProductDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags("products")
 @Controller('products')
 export class ProductController {
     constructor(private readonly productService: ProductService) {}

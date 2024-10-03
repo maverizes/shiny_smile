@@ -2,14 +2,24 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app';
 import * as morgan from 'morgan';
 import { ConfigService } from '@nestjs/config';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 //RUN APPLICATION
 async function startApp() {
-  const app = await NestFactory.create(AppModule,  );
+  const app = await NestFactory.create(AppModule,);
   const cfg = app.get(ConfigService)
 
   // SET GLOBAL PREFIX
   app.setGlobalPrefix('/api/v1')
+
+  const config = new DocumentBuilder()
+    .setTitle('Feane restaurant API')
+    .setDescription('The feane API description')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
 
 
   // USE MORGAN ON DEVELOPMENT ENVIRONMENT
