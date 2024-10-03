@@ -6,7 +6,6 @@ import { SequelizeModule } from "@nestjs/sequelize";
 import { CustomerModule } from "./modules/customers/customers.module";
 import { CheckAuthGuard } from "./guards";
 import { APP_GUARD } from "@nestjs/core";
-import { Customer } from "./modules/customers/model/customer.model";
 
 @Module({
   imports: [
@@ -29,11 +28,11 @@ import { Customer } from "./modules/customers/model/customer.model";
       inject: [ConfigService]
     }),
   ],
-  // providers: [
-  //   {
-  //     useClass: CheckAuthGuard,
-  //     provide: APP_GUARD
-  //   }
-  // ]
+  providers: [
+    {
+      useClass: CheckAuthGuard,
+      provide: APP_GUARD
+    }
+  ]
 })
 export class AppModule { }
