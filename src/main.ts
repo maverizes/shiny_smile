@@ -5,11 +5,12 @@ import { ConfigService } from '@nestjs/config';
 
 //RUN APPLICATION
 async function startApp() {
-  const app = await NestFactory.create(AppModule, { logger: false });
+  const app = await NestFactory.create(AppModule,  );
   const cfg = app.get(ConfigService)
 
   // SET GLOBAL PREFIX
   app.setGlobalPrefix('/api/v1')
+
 
   // USE MORGAN ON DEVELOPMENT ENVIRONMENT
   if (process.env.NODE_ENV.trim() == 'development') {
