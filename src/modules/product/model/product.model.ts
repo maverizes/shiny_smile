@@ -1,4 +1,3 @@
-// product.model.ts
 import { Column, Model, Table, DataType, ForeignKey } from 'sequelize-typescript';
 import { Category } from '../../category/model/category.model';
 

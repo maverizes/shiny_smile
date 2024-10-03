@@ -7,7 +7,7 @@ import { Customer } from './model/customer.model';
 export class CustomerController {
     constructor(private readonly customerService: CustomerService) {}
 
-    @Post()
+    @Post("/add")
     async create(@Body() createCustomerDto: CreateCustomerDto): Promise<Customer> {
         return this.customerService.create(createCustomerDto);
     }
@@ -22,7 +22,7 @@ export class CustomerController {
         return this.customerService.findOne(id);
     }
 
-    @Patch(':id')
+    @Patch('/update/:id')
     async update(
         @Param('id') id: number,
         @Body() updateCustomerDto: UpdateCustomerDto
@@ -30,7 +30,7 @@ export class CustomerController {
         return this.customerService.update(id, updateCustomerDto);
     }
 
-    @Delete(':id')
+    @Delete('/delete/:id')
     async remove(@Param('id') id: number): Promise<void> {
         return this.customerService.remove(id);
     }

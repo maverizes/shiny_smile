@@ -29,11 +29,11 @@ import { Customer } from "./modules/customers/model/customer.model";
       inject: [ConfigService]
     }),
   ],
-  providers: [
-    {
-      useClass: CheckAuthGuard,
-      provide: APP_GUARD
-    }
-  ]
+  // providers: [
+  //   {
+  //     useClass: CheckAuthGuard,
+  //     provide: APP_GUARD
+  //   }
+  // ]
 })
 export class AppModule { }

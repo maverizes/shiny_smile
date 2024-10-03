@@ -1,4 +1,3 @@
-// customer.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Customer } from './model/customer.model';
