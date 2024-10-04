@@ -13,8 +13,8 @@ async function startApp() {
   app.setGlobalPrefix('/api/v1')
 
   const config = new DocumentBuilder()
-    .setTitle('Feane restaurant API')
-    .setDescription('The feane API description')
+    .setTitle('Shiny Smile Coffe Application')
+    .setDescription('The Shiny Smile API description')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
