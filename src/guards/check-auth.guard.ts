@@ -1,7 +1,7 @@
 import { BadRequestException, CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { Observable } from "rxjs";
-import { Protected } from "src/decorators";
+import { Protected } from "../decorators/protected.decorator";
 
 @Injectable()
 export class CheckAuthGuard implements CanActivate {

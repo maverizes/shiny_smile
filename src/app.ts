@@ -6,15 +6,16 @@ import { SequelizeModule } from "@nestjs/sequelize";
 import { CustomerModule } from "./modules/customers/customers.module";
 import { CheckAuthGuard } from "./guards";
 import { APP_GUARD } from "@nestjs/core";
-
+import { ProductModule } from "./modules/product/product.module";
+import { CategoryModule } from "./modules/category";
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [appConfig, dbConfig]
+      load: [appConfig, dbConfig],
     }),
     SequelizeModule.forRootAsync({
-      imports: [ConfigModule, CustomerModule],
+      imports: [ConfigModule],
       useFactory: (cfg: ConfigService) => ({
         dialect: 'postgres',
         host: cfg.get('db.host'),
@@ -25,15 +26,16 @@ import { APP_GUARD } from "@nestjs/core";
         sync: { alter: true, force: false },
         autoLoadModels: true,
       }),
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
+    ProductModule,
+    CategoryModule // Ensure ProductModule is imported
   ],
-
   providers: [
     {
+      provide: APP_GUARD,
       useClass: CheckAuthGuard,
-      provide: APP_GUARD
-    }
-  ]
+    },
+  ],
 })
-export class AppModule { }
+export class AppModule {}
