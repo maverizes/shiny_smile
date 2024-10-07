@@ -3,6 +3,8 @@ import { Column, Model, Table, DataType } from 'sequelize-typescript';
 @Table
 export class Customer extends Model<Customer> {
 
+
+
     @Column({
         type: DataType.STRING,
         allowNull: false
@@ -20,4 +22,20 @@ export class Customer extends Model<Customer> {
         allowNull: true,
     })
     image: string;
+
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    email: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false
+    })
+    password: string
+
+
+
 }

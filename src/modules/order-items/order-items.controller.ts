@@ -7,7 +7,7 @@ import { UpdateOrderItemDto } from './dto/update-order-item.dto';
 export class OrderItemsController {
   constructor(private readonly orderItemsService: OrderItemsService) {}
 
-  @Post()
+  @Post("/add")
   create(@Body() createOrderItemDto: CreateOrderItemDto) {
     return this.orderItemsService.create(createOrderItemDto);
   }
@@ -22,12 +22,12 @@ export class OrderItemsController {
     return this.orderItemsService.findOne(id);
   }
 
-  @Put(':id')
+  @Put('/update/:id')
   update(@Param('id') id: number, @Body() updateOrderItemDto: UpdateOrderItemDto) {
     return this.orderItemsService.update(id, updateOrderItemDto);
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   remove(@Param('id') id: number) {
     return this.orderItemsService.remove(id);
   }

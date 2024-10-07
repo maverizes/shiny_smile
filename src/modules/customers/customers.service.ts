@@ -8,7 +8,7 @@ export class CustomerService {
     constructor(
         @InjectModel(Customer)
         private readonly customerModel: typeof Customer
-    ) {}
+    ) { }
 
     async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
         const customer = new Customer({ ...createCustomerDto });
@@ -26,6 +26,15 @@ export class CustomerService {
         }
         return customer;
     }
+
+    async findbyPhone(phone: string): Promise<Customer> {
+        const foundCustomer = await this.customerModel.findOne({ where: { phone } });
+        if (!foundCustomer) {
+            throw new NotFoundException(`Customer with phone ${phone} not found`);
+        }
+        return foundCustomer;
+    }
+
 
     async update(id: number, updateCustomerDto: UpdateCustomerDto): Promise<Customer> {
         const customer = await this.findOne(id);

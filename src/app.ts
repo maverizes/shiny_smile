@@ -28,6 +28,7 @@ import { APP_GUARD } from "@nestjs/core";
       inject: [ConfigService]
     }),
   ],
+
   providers: [
     {
       useClass: CheckAuthGuard,
