@@ -14,6 +14,12 @@ export class ProductService {
         return this.productModel.create(createProductDto);
     }
 
+    async getAllProductsByCategory(categoryId: number): Promise<Product[]> {
+        return this.productModel.findAll({
+            where: { categoryId },
+        });
+    }
+
     async findAll(): Promise<Product[]> {
         return this.productModel.findAll();
     }

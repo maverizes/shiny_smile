@@ -8,6 +8,8 @@ import { CheckAuthGuard } from "./guards";
 import { APP_GUARD } from "@nestjs/core";
 import { ProductModule } from "./modules/product/product.module";
 import { CategoryModule } from "./modules/category";
+import { TelegrafModule } from "nestjs-telegraf";
+import { BotModule } from "./client/bot/bot.module";
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -28,14 +30,22 @@ import { CategoryModule } from "./modules/category";
       }),
       inject: [ConfigService],
     }),
+    TelegrafModule.forRoot({
+      token: process.env.TELEGRAM_BOT_TOKEN
+    }),
+    BotModule,
     ProductModule,
-    CategoryModule // Ensure ProductModule is imported
+    CategoryModule
   ],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: CheckAuthGuard,
-    },
-  ],
+  // providers: [
+  //   {
+  //     provide: APP_GUARD,
+  //     useClass: CheckAuthGuard,
+  //   },
+  // ],
 })
-export class AppModule {}
+export class AppModule { }
+
+
+
+

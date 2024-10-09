@@ -1,36 +1,33 @@
-import { Column, Model, Table, DataType, ForeignKey } from 'sequelize-typescript';
-import { Category } from '../../category/model/category.model';
+import { Table, Column, Model, DataType, ForeignKey } from 'sequelize-typescript';
+import { Category } from '../../category/model/category.model'; 
 
 @Table
 export class Product extends Model<Product> {
     @Column({
         type: DataType.STRING,
-        allowNull: false
+        allowNull: false,
     })
     name: string;
 
     @Column({
         type: DataType.STRING,
-        allowNull: false
+        allowNull: true,
     })
     description: string;
 
     @Column({
-        type: DataType.BIGINT,
-        allowNull: false
-    })
-    price: number;
-
-    @Column({
-        type: DataType.TEXT,
-        allowNull: true
+        type: DataType.STRING,
+        allowNull: true,
     })
     image: string;
 
-    @ForeignKey(() => Category)
     @Column({
-        type: DataType.BIGINT,
-        allowNull: false
+        type: DataType.FLOAT,
+        allowNull: false,
     })
-    category_id: number;
+    price: number;
+
+    @ForeignKey(() => Category)
+    @Column
+    categoryId: number;
 }
