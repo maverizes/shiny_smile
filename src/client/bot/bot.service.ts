@@ -25,7 +25,8 @@ export class BotService {
         await context.replyWithPhoto(
             { source: createReadStream(imagePath), },
             {
-                caption: 'Welcome to our restaurant',
+                caption: `Welcome to Shiny Smile 😊
+                \nCategories below 👇`,
                 reply_markup: {
                     keyboard: [
                         [
@@ -42,7 +43,7 @@ export class BotService {
     @Command("help")
     async helpCommand(@Ctx() context: Context): Promise<void> {
         context.replyWithHTML(`<b>Bot commands: </b>
-        <i>/start - Restart the bot</i>
+        <i>/start - Start the bot</i>
         <i>/help - View bot commands</i>
         `)
     }
@@ -113,6 +114,7 @@ export class BotService {
             const imagePath = path.join(
                 __dirname,
                 "../../../",
+                "public",
                 product[0].image
             );
             context.replyWithPhoto(
