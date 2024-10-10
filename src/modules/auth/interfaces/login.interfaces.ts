@@ -6,5 +6,5 @@ export declare interface LoginRequest {
 export declare interface LoginResponse {
     accessToken: string;
     refreshToken: string;
-    message: string
+    message: string;
 }

@@ -1,15 +1,15 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
+import { TelegrafModule } from "nestjs-telegraf";
+import { SequelizeModule } from "@nestjs/sequelize";
+import { APP_GUARD } from "@nestjs/core";
 import appConfig from "./config/app.config";
 import dbConfig from "./config/db.config";
-import { SequelizeModule } from "@nestjs/sequelize";
-import { CustomerModule } from "./modules/customers/customers.module";
-import { CheckAuthGuard } from "./guards";
-import { APP_GUARD } from "@nestjs/core";
+import { UserModule } from "@modules";
+import { CheckAuthGuard } from "@guards";
 import { ProductModule } from "./modules/product/product.module";
 import { CategoryModule } from "./modules/category";
-import { TelegrafModule } from "nestjs-telegraf";
-import { BotModule } from "./client/bot/bot.module";
+import { BotModule } from "@client";
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -37,12 +37,12 @@ import { BotModule } from "./client/bot/bot.module";
     ProductModule,
     CategoryModule
   ],
-  // providers: [
-  //   {
-  //     provide: APP_GUARD,
-  //     useClass: CheckAuthGuard,
-  //   },
-  // ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: CheckAuthGuard,
+    },
+  ],
 })
 export class AppModule { }
 

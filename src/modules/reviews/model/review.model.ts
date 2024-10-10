@@ -1,5 +1,5 @@
 import { Column, Model, Table, PrimaryKey, AutoIncrement, DataType, ForeignKey } from 'sequelize-typescript';
-import { Customer } from '../../customers/model/customer.model';
+import { User } from '@modules';
 
 @Table({ tableName: 'reviews', timestamps: false })
 export class Review extends Model<Review> {
@@ -17,7 +17,7 @@ export class Review extends Model<Review> {
   })
   content: string;
 
-  @ForeignKey(() => Customer)
+  @ForeignKey(() => User)
   @Column({
     type: DataType.BIGINT,
   })

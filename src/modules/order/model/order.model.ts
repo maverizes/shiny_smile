@@ -1,5 +1,5 @@
 import { Column, Model, Table, DataType, ForeignKey } from 'sequelize-typescript';
-import { Customer } from '../../customers/model/customer.model';
+import { User } from '@modules';
 
 @Table
 export class Order extends Model<Order> {
@@ -16,7 +16,7 @@ export class Order extends Model<Order> {
     })
     status: string;
 
-    @ForeignKey(() => Customer)
+    @ForeignKey(() => User)
     @Column({
         type: DataType.BIGINT,
         allowNull: false

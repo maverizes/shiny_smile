@@ -1,19 +1,32 @@
-import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { LoginResponse, RefreshResponse, RegisterResponse } from './interfaces';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { LoginDto, RefreshDto, RegisterDto } from './dtos';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService) {}
+  #_service: AuthService;
 
-    @Post('login')
-    async login(@Body() body: { phone: string; password: string }) {
-        const { phone, password } = body;
-        return this.authService.login(phone, password);
-    }
+  constructor(service: AuthService) {
+    this.#_service = service;
+  }
+  @ApiOperation({ summary: 'Login qilish' })
+  @Post('/login')
+  async signIn(@Body() payload: LoginDto): Promise<LoginResponse> {
+    return await this.#_service.login(payload);
+  }
 
-    @Post('verify-token')
-    async verifyToken(@Body() body: { token: string }) {
-        const { token } = body;
-        return this.authService.verifyToken(token);
-    }
+  @ApiOperation({ summary: 'Register qilish' })
+  @Post('/register')
+  async signUp(@Body() payload: RegisterDto): Promise<RegisterResponse> {
+    return await this.#_service.register(payload);
+  }
+
+  @ApiOperation({ summary: 'Refresh tokenni yangilash' })
+  @Post('/refresh')
+  async refresh(@Body() payload: RefreshDto): Promise<RefreshResponse> {
+    return await this.#_service.refresh(payload);
+  }
 }

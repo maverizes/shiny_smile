@@ -1,4 +1,5 @@
 export * from './category'
-export * from './customers'
+export * from './user'
 export * from './order'
 export * from './product'
+export * from './reviews'
